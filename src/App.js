@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import axios from 'axios'
-
+import Detail from './components/Detail'
+import List from './components/List'
 class App extends Component {
   constructor(props) {
     super(props)
@@ -15,22 +15,19 @@ class App extends Component {
   componentDidMount() {
     axios.get('https://cors-anywhere.herokuapp.com/https://fe-api.smarkets.com/v0/events/popular/')
     .then(res => this.setState({
-      events:res.data
+      events:res.data.results
     })
     )}
 
+
   render() {
-    if(this.state.events === []) {
-      return (
-        <div>
-          loading..
-        </div>
-      )
-    }
+    // let populate = this.state.events.map((element,i) => {
+    //   return <Link className='collection-item'key={i} to={`/${element.id}`}><div key={element.id} info={this.state.events[i]}>{element.name}</div></Link>
+    // })
 
     return (
-      <div className="App">
-
+      <div className="container">
+        <Route exact path ='/' render={(props) => <List {...props} info={this.state.events}/> }/>
       </div>
     );
   }
