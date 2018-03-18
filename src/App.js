@@ -21,13 +21,12 @@ class App extends Component {
 
 
   render() {
-    // let populate = this.state.events.map((element,i) => {
-    //   return <Link className='collection-item'key={i} to={`/${element.id}`}><div key={element.id} info={this.state.events[i]}>{element.name}</div></Link>
-    // })
+
 
     return (
       <div className="container">
         <Route exact path ='/' render={(props) => <List {...props} info={this.state.events}/> }/>
+        <Route exact path='/:eventId' render={(props) =>  <Detail {...props} info={this.state.events}/> }/>
       </div>
     );
   }

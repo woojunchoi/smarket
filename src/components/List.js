@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import { Route, Link } from "react-router-dom";
+import Event from './Event.js'
 
 class List extends Component {
   constructor(props) {
@@ -7,15 +8,15 @@ class List extends Component {
 
   }
 
-
-
   render() {
     let populate = this.props.info.map((element,i) => {
-      return <div className='collection-item' key={element.id}>{element.name}</div>
+      return  <Link className='collection-item' key={element.id} to={`/${element.id}`}>
+      <div key={i}>{element.name}</div>
+      </Link>
     })
     return (
       <div className='collection'>
-        {populate}
+            {populate}
       </div>
     );
   }
