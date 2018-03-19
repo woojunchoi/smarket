@@ -1,0 +1,13 @@
+.detail-box {
+    width:75%;
+  }
+  
+  .button-box {
+    display:flex;
+    justify-content: center;
+    align-items:center;
+  }
+  
+  .waves-effect :hover{
+    cursor:pointer;
+  }

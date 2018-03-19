@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../css/App.css';
 import { Route, withRouter } from "react-router-dom";
 import axios from 'axios'
-import Detail from './components/Detail'
-import List from './components/List'
+import Detail from '../components/Detail'
+import List from '../components/List'
 import { connect } from 'react-redux';
-import * as actions from './action/actions'
+import * as actions from '../action/actions'
 
 const CancelToken = axios.CancelToken;
 const source = CancelToken.source();
@@ -21,6 +21,7 @@ const mapStateToProps = (store,ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
 fetchEvents : () => dispatch(actions.fetchEvents()),
 fetchDetail : (param) => dispatch(actions.fetchDetail(param)),
+resetProp : () => dispatch(actions.resetProp())
 });
 
 class App extends Component {
@@ -39,7 +40,7 @@ class App extends Component {
       return (
         <div className='container'>
           <Route exact path ='/' render={(props) => <List {...props} info={this.props.events}/> }/>
-          <Route exact path='/:eventId' render={(props) =>  <Detail {...props} detail={this.props.detail} fetchDetail={this.props.fetchDetail}/> }/>
+          <Route exact path='/:eventId' render={(props) =>  <Detail {...props} resetProp = {this.props.resetProp} detail={this.props.detail} fetchDetail={this.props.fetchDetail}/> }/>
         </div>
       );
     }

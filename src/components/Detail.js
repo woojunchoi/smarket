@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import '../App.css';
+import '../css/Detail.css';
 import Moment from 'react-moment'
 import {Link} from'react-router-dom'
 
@@ -18,9 +18,7 @@ class Detail extends Component {
   }
 
   render() {
-    console.log(this.props.detail)
-
-
+    //if state is not null, dom manipulate with data from API
     if(this.props.detail !== null) {
       return (
         <div className ='detail-box'>
@@ -37,12 +35,13 @@ class Detail extends Component {
             </div>
         </div>
           <div className='button-box'>
-            <Link to='/'><a className="waves-effect waves-light btn">back</a></Link>
+            <Link to='/'><div className="waves-effect waves-light btn" onClick={this.props.resetProp}>back</div></Link>
           </div>
       </div>
       )
     }
     return (
+    //if state is null, print loading
       <div className='container'>
       <div className="preloader-wrapper medium active">
       <div className="spinner-layer spinner-green-only">

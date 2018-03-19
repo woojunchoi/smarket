@@ -10,6 +10,10 @@ const detail_reducer = (state = initialState, action) => {
             return Object.assign({},state, {
                 detail:action.data
             })
+        case actions.RESET_PROP:
+            return Object.assign({},state, {
+                detail:null
+            })
         default:
             return state;
     }
