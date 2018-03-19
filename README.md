@@ -2,8 +2,6 @@
 
 ## Front End Technologies:</br>ReactJS, Redux, React-Router, JavaScript, HTML5, CSS3, Materialize.css
 
-## Back End Technologies: NodeJS, Express
-
 #### Description
 
 - An application that allows users to see events information
