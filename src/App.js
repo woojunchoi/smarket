@@ -11,11 +11,12 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      events:[]
+      events:null
     }
   }
 
   componentDidMount() {
+
     axios.get('https://cors-anywhere.herokuapp.com/https://fe-api.smarkets.com/v0/events/popular/',
     {cancelToken: source.token}
     )
@@ -25,16 +26,32 @@ class App extends Component {
     )}
   
   componentWillUnmount() {
-    source.cancel();
+    source.cancel('unmounted');
   }
 
-  render() {
-    console.log(this.state.events)
 
-    return (
-      <div className="container">
-        <Route exact path ='/' render={(props) => <List {...props} info={this.state.events}/> }/>
-        <Route exact path='/:eventId' render={(props) =>  <Detail {...props} info={this.state.events}/> }/>
+  render() {
+    if(this.state.events) {
+      return (
+        <div className='container'>
+          <Route exact path ='/' render={(props) => <List {...props} info={this.state.events}/> }/>
+          <Route exact path='/:eventId' render={(props) =>  <Detail {...props} info={this.state.events}/> }/>
+        </div>
+      );
+    }
+      return (
+        <div className='container'>
+        <div className="preloader-wrapper medium active">
+        <div className="spinner-layer spinner-green-only">
+          <div className="circle-clipper left">
+            <div className="circle"></div>
+          </div><div className="gap-patch">
+            <div className="circle"></div>
+          </div><div className="circle-clipper right">
+            <div className="circle"></div>
+          </div>
+        </div>
+      </div>
       </div>
     );
   }
