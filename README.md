@@ -1,8 +1,8 @@
 # SMARKET TAKE HOME TEST
 
-## Front End Technologies: 
-## ReactJS, Redux, React-Router, JavaScript, HTML5, CSS3, Materialize
-## Back End Technologies: NodeJS, Express
+## Front End Technologies:ReactJS, Redux, React-Router, JavaScript, HTML5, CSS3, Materialize
+
+## Back End Technologies:NodeJS, Express
 
 #### Description
 
