@@ -11,3 +11,7 @@
   .waves-effect :hover{
     cursor:pointer;
   }
+  
+  .card {
+    background-color:#161616;
+  }
