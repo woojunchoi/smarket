@@ -14,7 +14,7 @@
 
 > 1. Fork this repo
 > 2. Clone your forked copy of this repo
->    - `git clone https://github.com/[Your Username]/fe-sample-project.git`
+>    - `git clone https://github.com/[Your Username]/smarket.git`
 > 3. Change directory into the newly cloned repo
 >    - `cd smarket`
 > 4. Install dependencies 
