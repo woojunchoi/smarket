@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Link } from "react-router-dom";
-import Event from './Event.js'
+import {  Link } from "react-router-dom";
 
 class List extends Component {
-  constructor(props) {
-    super(props)
-
-  }
 
   render() {
     let populate = this.props.info.map((element,i) => {

@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Link } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import axios from 'axios'
 import Detail from './components/Detail'
 import List from './components/List'
+import { connect } from 'react-redux';
+import * as actions from './action/actions'
+
 const CancelToken = axios.CancelToken;
 const source = CancelToken.source();
 
+
+//pass states as props
+const mapStateToProps = (store,ownProps) => ({
+  events: store.events_reducer.events,
+  detail: store.detail_reducer.detail,
+});
+
+//pass action dispatcher as props
+const mapDispatchToProps = (dispatch) => ({
+fetchEvents : () => dispatch(actions.fetchEvents()),
+fetchDetail : (param) => dispatch(actions.fetchDetail(param)),
+});
+
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      events:null
-    }
-  }
 
   componentDidMount() {
-
-    axios.get('https://cors-anywhere.herokuapp.com/https://fe-api.smarkets.com/v0/events/popular/',
-    {cancelToken: source.token}
-    )
-    .then(res => this.setState({
-      events:res.data.results
-    })
-    )}
+    this.props.fetchEvents()
+  }
   
   componentWillUnmount() {
     source.cancel('unmounted');
@@ -31,11 +35,11 @@ class App extends Component {
 
 
   render() {
-    if(this.state.events) {
+    if(this.props.events) {
       return (
         <div className='container'>
-          <Route exact path ='/' render={(props) => <List {...props} info={this.state.events}/> }/>
-          <Route exact path='/:eventId' render={(props) =>  <Detail {...props} info={this.state.events}/> }/>
+          <Route exact path ='/' render={(props) => <List {...props} info={this.props.events}/> }/>
+          <Route exact path='/:eventId' render={(props) =>  <Detail {...props} detail={this.props.detail} fetchDetail={this.props.fetchDetail}/> }/>
         </div>
       );
     }
@@ -57,4 +61,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

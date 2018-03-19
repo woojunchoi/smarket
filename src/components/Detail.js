@@ -1,51 +1,44 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import '../App.css';
-import moment from 'moment'
+import Moment from 'react-moment'
+import {Link} from'react-router-dom'
+
 const CancelToken = axios.CancelToken;
 const source = CancelToken.source();
 
 class Detail extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      detail:null
-    }
-  }
 
   componentDidMount() {
-    const param = this.props.match.params.eventId
-    axios.get(`https://cors-anywhere.herokuapp.com/https://fe-api.smarkets.com/v0/events/id/${param}`,
-      {cancelToken: source.token}
-    )
-    .then(res => this.setState({
-      detail:res.data
-    }))
+    this.props.fetchDetail(this.props.match.params.eventId)
   }
 
   componentWillUnmount() {
     source.cancel('unmounted');
   }
-  // (example: name, league, start time)
 
   render() {
-    console.log(this.state.detail)
+    console.log(this.props.detail)
 
 
-    if(this.state.detail) {
+    if(this.props.detail !== null) {
       return (
         <div className ='detail-box'>
-        <div className="row center-align">
-          <div className="card blue-grey darken-1">
-            <div className="card-content white-text">
-              <h3>{this.state.detail.event.name}</h3>
-              <h4>{this.state.detail.event.event_type} League</h4>
+          <div className="row center-align">
+            <div className="card blue-grey darken-1">
+              <div className="card-content white-text">
+                <h4>{this.props.detail.event.name}</h4>
+                <h5>League : {this.props.detail.event.event_type}</h5>
+              </div>
+              <div className="card-content white-text">
+                <h5 style={{color:'black'}}><Moment format="MMMM Do YYYY hh:mm a">{this.props.detail.event.start_datetime}</Moment></h5>
+                <h5 style={{color:'black'}}><Moment fromNow>{this.props.detail.event.start_datetime}</Moment></h5>
+              </div>
             </div>
-            <div className="card-content white-text">
-            <h4>{this.state.detail.event.start_datetime}</h4>
-            </div>
+        </div>
+          <div className='button-box'>
+            <Link to='/'><a className="waves-effect waves-light btn">back</a></Link>
           </div>
-      </div>
       </div>
       )
     }
