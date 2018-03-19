@@ -37,7 +37,7 @@ class Detail extends Component {
             </div>
         </div>
           <div className='button-box'>
-            <Link to='/'><div className="waves-effect waves-light btn" onClick={this.props.resetProp}>back</div></Link>
+            <Link to='/'><div className="btn" onClick={this.props.resetProp}>back</div></Link>
           </div>
       </div>
       )
